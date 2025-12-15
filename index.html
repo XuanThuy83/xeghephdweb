@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xe Ghép Hà Nội ⇄ Hải Dương - Đặt xe ghép, bao xe, sân bay</title>
+  <meta name="description" content="Xe ghép Hà Nội ⇄ Hải Dương đón trả tận nơi. Ghép xe 150.000–200.000đ, bao xe 450.000–550.000đ. Sân bay Nội Bài → Hải Dương giá như ghép xe. Đặt xe nhanh 24/7 qua hotline/Zalo.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+            <img
+    src="./accset/logo/logomoihon.png"
+    class="logo-img"
+  />
+          <div>
+            <div>Xe Ghép Hà Nội-Hải Dương</div>
+            <small style="font-size:11px;color:#6b7280;">Ghép xe, bao xe, sân bay</small>
+          </div>
+        </div>
+
+        <div class="nav-links">
+          <a href="#dat-xe">Đặt xe</a>
+          <a href="#dich-vu">Dịch vụ</a>
+          <a href="#tuyen-pho-bien">Tuyến xe</a>
+          <a href="#doi-tac">Đối tác</a>
+          <a href="#lien-he">Liên hệ</a>
+        </div>
+
+        <div class="nav-hotline">
+          <div>
+            <span>Hotline / Zalo</span>
+            <strong>0945983789</strong>
+          </div>
+          <!-- Nút ĐẶT XE NGAY: dùng class btn-call để JS bắt sự kiện gọi điện -->
+          <button type="button" class="btn btn-primary booking-submit btn-call">
+            ĐẶT XE NGAY
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO + BOOKING -->
+  <section class="hero" id="dat-xe">
+    <div class="container hero-inner booking-layout">
+      <!-- FORM ĐẶT XE -->
+      <div class="booking-panel">
+        <!-- Tabs -->
+        <div class="booking-tabs">
+          <button class="booking-tab active" data-type="tuyen-thuong">🚐 Tuyến thường</button>
+          <button class="booking-tab" data-type="san-bay">✈️ Sân bay</button>
+        </div>
+
+        <form id="bookingForm">
+          <!-- Hàng 1: Điểm đi / Điểm đến -->
+          <div class="booking-row">
+            <div class="icon-field">
+              <div class="icon-field-prefix"><span class="icon">🧍</span></div>
+              <div class="icon-field-main">
+                <label>Điểm đi *</label>
+                <select name="from" required>
+                  <option value="">Chọn điểm đi</option>
+
+                  <optgroup label="Hà Nội">
+                    <option value="HN-BaDinh">Ba Đình</option>
+                    <option value="HN-HoanKiem">Hoàn Kiếm</option>
+                    <option value="HN-HaiBaTrung">Hai Bà Trưng</option>
+                    <option value="HN-DongDa">Đống Đa</option>
+                    <option value="HN-TayHo">Tây Hồ</option>
+                    <option value="HN-CauGiay">Cầu Giấy</option>
+                    <option value="HN-ThanhXuan">Thanh Xuân</option>
+                    <option value="HN-HoangMai">Hoàng Mai</option>
+                    <option value="HN-LongBien">Long Biên</option>
+                    <option value="HN-HaDong">Hà Đông</option>
+                    <option value="HN-BacTuLiem">Bắc Từ Liêm</option>
+                    <option value="HN-NamTuLiem">Nam Từ Liêm</option>
+                    <option value="HN-SocSon">Sóc Sơn</option>
+                    <option value="HN-DongAnh">Đông Anh</option>
+                    <option value="HN-GiaLam">Gia Lâm</option>
+                    <option value="HN-ThanhTri">Thanh Trì</option>
+                    <option value="HN-HoaiDuc">Hoài Đức</option>
+                    <option value="HN-QuocOai">Quốc Oai</option>
+                    <option value="HN-ThanhOai">Thanh Oai</option>
+                    <option value="HN-ThuongTin">Thường Tín</option>
+                    <option value="HN-PhuXuyen">Phú Xuyên</option>
+                    <option value="HN-ChuongMy">Chương Mỹ</option>
+                    <option value="HN-UngHoa">Ứng Hòa</option>
+                    <option value="HN-MyDuc">Mỹ Đức</option>
+                    <option value="HN-BaVi">Ba Vì</option>
+                    <option value="HN-PhucTho">Phúc Thọ</option>
+                    <option value="HN-ThachThat">Thạch Thất</option>
+                    <option value="HN-DanPhuong">Đan Phượng</option>
+                    <option value="HN-MeLinh">Mê Linh</option>
+                  </optgroup>
+
+                  <optgroup label="Hải Dương">
+                    <option value="HD-TPHaiDuong">TP Hải Dương</option>
+                    <option value="HD-ChiLinh">Chí Linh</option>
+                    <option value="HD-KinhMon">Kinh Môn</option>
+                    <option value="HD-KimThanh">Kim Thành</option>
+                    <option value="HD-NamSach">Nam Sách</option>
+                    <option value="HD-CamGiang">Cẩm Giàng</option>
+                    <option value="HD-BinhGiang">Bình Giang</option>
+                    <option value="HD-GiaLoc">Gia Lộc</option>
+                    <option value="HD-TuKy">Tứ Kỳ</option>
+                    <option value="HD-ThanhMien">Thanh Miện</option>
+                    <option value="HD-NinhGiang">Ninh Giang</option>
+                    <option value="HD-ThanhHa">Thanh Hà</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div class="icon-field">
+              <div class="icon-field-prefix"><span class="icon">📍</span></div>
+              <div class="icon-field-main">
+                <label>Điểm đến *</label>
+                <select name="to" required>
+                  <option value="">Chọn điểm đến</option>
+
+                  <optgroup label="Hà Nội">
+                    <option value="HN-BaDinh">Ba Đình</option>
+                    <option value="HN-HoanKiem">Hoàn Kiếm</option>
+                    <option value="HN-HaiBaTrung">Hai Bà Trưng</option>
+                    <option value="HN-DongDa">Đống Đa</option>
+                    <option value="HN-TayHo">Tây Hồ</option>
+                    <option value="HN-CauGiay">Cầu Giấy</option>
+                    <option value="HN-ThanhXuan">Thanh Xuân</option>
+                    <option value="HN-HoangMai">Hoàng Mai</option>
+                    <option value="HN-LongBien">Long Biên</option>
+                    <option value="HN-HaDong">Hà Đông</option>
+                    <option value="HN-BacTuLiem">Bắc Từ Liêm</option>
+                    <option value="HN-NamTuLiem">Nam Từ Liêm</option>
+                    <option value="HN-SocSon">Sóc Sơn</option>
+                    <option value="HN-DongAnh">Đông Anh</option>
+                    <option value="HN-GiaLam">Gia Lâm</option>
+                    <option value="HN-ThanhTri">Thanh Trì</option>
+                    <option value="HN-HoaiDuc">Hoài Đức</option>
+                    <option value="HN-QuocOai">Quốc Oai</option>
+                    <option value="HN-ThanhOai">Thanh Oai</option>
+                    <option value="HN-ThuongTin">Thường Tín</option>
+                    <option value="HN-PhuXuyen">Phú Xuyên</option>
+                    <option value="HN-ChuongMy">Chương Mỹ</option>
+                    <option value="HN-UngHoa">Ứng Hòa</option>
+                    <option value="HN-MyDuc">Mỹ Đức</option>
+                    <option value="HN-BaVi">Ba Vì</option>
+                    <option value="HN-PhucTho">Phúc Thọ</option>
+                    <option value="HN-ThachThat">Thạch Thất</option>
+                    <option value="HN-DanPhuong">Đan Phượng</option>
+                    <option value="HN-MeLinh">Mê Linh</option>
+                  </optgroup>
+
+                  <optgroup label="Hải Dương">
+                    <option value="HD-TPHaiDuong">TP Hải Dương</option>
+                    <option value="HD-ChiLinh">Chí Linh</option>
+                    <option value="HD-KinhMon">Kinh Môn</option>
+                    <option value="HD-KimThanh">Kim Thành</option>
+                    <option value="HD-NamSach">Nam Sách</option>
+                    <option value="HD-CamGiang">Cẩm Giàng</option>
+                    <option value="HD-BinhGiang">Bình Giang</option>
+                    <option value="HD-GiaLoc">Gia Lộc</option>
+                    <option value="HD-TuKy">Tứ Kỳ</option>
+                    <option value="HD-ThanhMien">Thanh Miện</option>
+                    <option value="HD-NinhGiang">Ninh Giang</option>
+                    <option value="HD-ThanhHa">Thanh Hà</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hàng 2: loại dịch vụ / thời gian -->
+          <div class="booking-row">
+            <div class="booking-service">
+              <label>Loại dịch vụ</label>
+              <div class="booking-radio-group">
+                <label><input type="radio" name="service" value="xe-ghep" checked /> Ghép xe</label>
+                <label><input type="radio" name="service" value="bao-xe" /> Bao xe</label>
+                <label><input type="radio" name="service" value="gui-do" /> Gửi đồ</label>
+              </div>
+            </div>
+
+            <div class="icon-field">
+              <div class="icon-field-prefix"><span class="icon">📅</span></div>
+              <div class="icon-field-main">
+                <label>Thời gian đi *</label>
+                <div class="time-group">
+                  <input type="date" name="date" required />
+                  <select name="time_slot" required>
+                    <option value="">Chọn giờ</option>
+                    <option>00:00</option><option>01:00</option><option>02:00</option><option>03:00</option>
+                    <option>04:00</option><option>05:00</option><option>06:00</option><option>07:00</option>
+                    <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+                    <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+                    <option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option>
+                    <option>20:00</option><option>21:00</option><option>22:00</option><option>23:00</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hàng 3: Họ tên / SĐT -->
+          <div class="booking-row">
+            <div class="icon-field">
+              <div class="icon-field-prefix"><span class="icon">👤</span></div>
+              <div class="icon-field-main">
+                <label>Họ và tên *</label>
+                <input type="text" name="name" placeholder="Nhập họ tên" required />
+              </div>
+            </div>
+            <div class="icon-field">
+              <div class="icon-field-prefix"><span class="icon">📞</span></div>
+              <div class="icon-field-main">
+                <label>Số điện thoại *</label>
+                <input type="tel" name="phone" placeholder="Nhập số điện thoại" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Giá chuyến đi -->
+          <div class="price-box">
+            <div>
+              <div class="price-label">Giá chuyến đi:</div>
+              <div class="price-value">Đang cập nhật...</div>
+            </div>
+            <button type="button" class="price-map-btn">⤏ Xem trên bản đồ</button>
+          </div>
+
+          <!-- Nút đặt xe + lưu ý -->
+          <div class="booking-bottom">
+            <button type="submit" class="btn btn-primary booking-submit">ĐẶT XE</button>
+            <p class="booking-note">
+              Lưu ý: Tuyến khác vui lòng gọi hotline 0945983789. Vé xe được xác nhận lại qua Zalo hoặc điện thoại.
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- CỘT CAM KẾT -->
+      <div class="booking-commit">
+        <h2>5 CAM KẾT VÀNG<br />VỀ DỊCH VỤ CỦA CHÚNG TÔI</h2>
+        <ol>
+          <li>Giá công khai, rõ ràng – không phát sinh.</li>
+          <li>Đón trả tận nơi – đúng giờ.</li>
+          <li>Xe sạch sẽ, tài xế lịch sự.</li>
+          <li>Hỗ trợ 24/7 qua Hotline/Zalo.</li>
+          <li>Ưu tiên an toàn – lộ trình tối ưu.</li>
+        </ol>
+        <button class="btn btn-primary booking-commit-btn btn-call">ĐẶT XE NGAY</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUTES -->
+  <section id="tuyen-pho-bien">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Tuyến phổ biến</div>
+        <h2 class="section-title">Hà Nội ⇄ Hải Dương &amp; Sân bay</h2>
+        <p class="section-desc">
+          Giá ghép xe 150.000 – 200.000đ • Bao xe 450.000 – 550.000đ • Sân bay Nội Bài → Hải Dương: giá như ghép xe.
+        </p>
+      </div>
+
+      <div class="routes-grid">
+        <div class="route-card">
+          <div class="route-label">Tuyến thường</div>
+          <div class="route-name">Hà Nội → Hải Dương</div>
+          <div class="route-meta">Đón tận nơi • Trả tận nơi</div>
+          <div class="route-price">150.000 – 200.000đ (ghép)</div>
+        </div>
+
+        <div class="route-card">
+          <div class="route-label">Tuyến thường</div>
+          <div class="route-name">Hải Dương → Hà Nội</div>
+          <div class="route-meta">Đón tận nơi • Trả tận nơi</div>
+          <div class="route-price">150.000 – 200.000đ (ghép)</div>
+        </div>
+
+        <div class="route-card">
+          <div class="route-label">Sân bay</div>
+          <div class="route-name">Nội Bài → Hải Dương</div>
+          <div class="route-meta">Đón tại sân bay • Trả tận nơi</div>
+          <div class="route-price">150.000 – 200.000đ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="lien-he">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Thông tin &amp; hỗ trợ</div>
+        <h2 class="section-title">Liên hệ đặt xe &amp; hợp tác</h2>
+        <p class="section-desc">
+          Gọi điện, nhắn Zalo, hoặc để lại thông tin bên dưới – chúng tôi sẽ liên hệ lại sớm nhất để tư vấn &amp; xác nhận chuyến xe.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:10px;">
+            Thông tin liên hệ
+          </h3>
+
+          <div class="contact-row">
+            <strong>Công ty vận tải (tùy chỉnh tên của bạn)</strong>
+            <span>Đơn vị kết nối &amp; điều phối dịch vụ xe ghép, bao xe, sân bay.</span>
+          </div>
+
+          <div class="contact-row">
+            <strong>Địa chỉ</strong>
+            <span>Địa chỉ văn phòng / bãi xe của bạn ( Hà Đông, Hà Nội).</span>
+          </div>
+
+          <div class="contact-row">
+            <strong>Hotline đặt xe</strong>
+            <span>0945983789 (hỗ trợ 24/7 – có Zalo)</span>
+          </div>
+
+          <div class="contact-row">
+            <strong>Email</strong>
+            <span>cskh@xeghepquocgia.vn (ví dụ)</span>
+          </div>
+
+          <div class="contact-row">
+            <strong>Thời gian làm việc</strong>
+            <span>Đặt xe 24/7 – Văn phòng hỗ trợ 7:30 – 22:00 hàng ngày.</span>
+          </div>
+
+          <div class="contact-row">
+            <strong>Lưu ý</strong>
+            <span>
+              Các tuyến chưa có trong danh sách hoặc lộ trình phức tạp (nhiều điểm đón/trả),
+              vui lòng gọi trực tiếp hotline để được tư vấn nhanh hơn.
+            </span>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h3 style="font-size:15px;font-weight:700;margin-bottom:10px;">Gửi yêu cầu báo giá / hợp tác</h3>
+          <form id="contactForm">
+            <div class="field" style="margin-bottom:8px;">
+              <label>Họ và tên *</label>
+              <input type="text" name="name" required placeholder="Tên của bạn" />
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label>Số điện thoại *</label>
+              <input type="tel" name="phone" required placeholder="SĐT/Zalo" />
+            </div>
+            <div class="field" style="margin-bottom:8px;">
+              <label>Loại yêu cầu *</label>
+              <select name="type" required>
+                <option value="">-- Chọn --</option>
+                <option value="dat-xe">Đặt xe / hỏi tuyến</option>
+                <option value="hop-tac-tai-xe">Đăng ký làm đối tác tài xế</option>
+                <option value="hop-tac-doanh-nghiep">Hợp tác vận tải với doanh nghiệp</option>
+                <option value="khac">Khác</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:10px;">
+              <label>Nội dung chi tiết</label>
+              <textarea name="message" placeholder="Mô tả ngắn về nhu cầu của bạn..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Gửi thông tin</button>
+            <p style="margin-top:8px;font-size:11px;color:#6b7280;">
+              Bằng cách gửi, bạn đồng ý cho phép chúng tôi liên hệ lại qua điện thoại/Zalo.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2025 Xe Ghép Hà Nội ⇄ Hải Dương. Giữ mọi quyền.</div>
+      <div class="footer-links">
+        <a href="#tuyen-pho-bien">Tuyến xe</a>
+        <a href="#lien-he">Liên hệ</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GẮN JS -->
+  <script src="telegram.js"></script>
+  <script src="script.js"></script>
+
+  <!-- FLOATING CONTACT WIDGET (giữ giống dự án) -->
+  <div class="contact-widget">
+    <button class="contact-toggle" aria-label="Mở menu liên hệ">
+      <img src="./accset/logo/0a039995-4d2a-42ce-b722-1d8cd2968e7b.png" class="menu-main-icon">
+    </button>
+
+    <a href="tel:0945983789" class="contact-item contact-item-1 contact-item-call">
+      <img src="./accset/logo/images.png" class="icon-small">
+    </a>
+
+    <a href="sms:0945983789" class="contact-item contact-item-2 contact-item-sms">
+      <img src="./accset/logo/sms.png" class="icon-small">
+    </a>
+
+    <a href="https://zalo.me/0945983789" class="contact-item contact-item-3 contact-item-zalo">
+      <img src="./accset/logo/zalo.png" class="icon-small">
+    </a>
+
+    <a href="#" class="contact-item contact-item-4 contact-item-messenger">
+      <img src="./accset/logo/mess.png" class="icon-small">
+    </a>
+  </div>
+</body>
+</html>
