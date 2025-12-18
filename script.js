@@ -56,9 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (optCity === city) opt.hidden = true;
     });
 
+    // Nếu lỡ còn đang chọn cùng tỉnh -> reset
     if (targetSelect.value) {
       const targetCity = getCity(targetSelect.value);
-      if (targetCity === city) targetSelect.value = "";
+      if (targetCity === city) {
+        targetSelect.value = "";
+        targetSelect.selectedIndex = 0;
+      }
     }
   }
 
@@ -85,21 +89,13 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // ===== SÂN BAY NỘI BÀI → HẢI DƯƠNG: GIÁ NHƯ GHÉP XE (không phân biệt bao/ghép) =====
-      if (
-      (fromCity === "NB" && toCity === "HD") 
-    ) {
+    // ===== SÂN BAY NỘI BÀI → HẢI DƯƠNG =====
+    if (fromCity === "NB" && toCity === "HD") {
       if (service === "bao-xe") {
         priceValue.textContent = "450.000 – 550.000đ (bao xe)";
       } else {
         priceValue.textContent = "150.000 – 200.000đ (ghép xe)";
       }
-      return;
-    }
-    ///
-    if (fromCity === "NB" && toCity === "HD") {
-      priceValue.textContent = "150.000 – 200.000đ";
-      priceValue.classList.add("airport");
       return;
     }
 
@@ -116,35 +112,61 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Nếu vì lý do nào đó vẫn chọn sai (ví dụ reload/DOM khác)
+    // Nếu vì lý do nào đó vẫn chọn sai
     priceValue.textContent = "Tuyến này chưa hỗ trợ – vui lòng gọi hotline.";
+  }
+
+  // Helper: iOS đôi khi chưa cập nhật DOM kịp
+  function safeUpdatePrice() {
+    requestAnimationFrame(updatePrice);
+    setTimeout(updatePrice, 0);
   }
 
   // Lắng nghe đổi dịch vụ
   const serviceRadios = document.querySelectorAll('input[name="service"]');
   if (serviceRadios.length) {
     serviceRadios.forEach(function (radio) {
-      radio.addEventListener("change", updatePrice);
+      radio.addEventListener("change", safeUpdatePrice);
     });
   }
 
-  // Lắng nghe đổi điểm đi/đến
+  // Lắng nghe đổi điểm đi/đến (FIX iPhone Safari)
   if (fromSelect && toSelect) {
-    fromSelect.addEventListener("change", function () {
-      filterSelect(fromSelect, toSelect);
-      updatePrice();
-    });
+    function onFromChanged() {
+      // RESET điểm đến trước (fix iOS giữ value cũ)
+      toSelect.value = "";
+      toSelect.selectedIndex = 0;
 
-    toSelect.addEventListener("change", function () {
-      filterSelect(toSelect, fromSelect);
-      updatePrice();
+      filterSelect(fromSelect, toSelect);
+      safeUpdatePrice();
+    }
+
+    // iOS Safari: thêm input để chắc ăn
+    fromSelect.addEventListener("change", onFromChanged);
+    fromSelect.addEventListener("input", onFromChanged);
+
+    // KHÔNG filter ngược lại khi đổi điểm đến (tránh dính state trên mobile/iOS)
+    function onToChanged() {
+      safeUpdatePrice();
+    }
+    toSelect.addEventListener("change", onToChanged);
+    toSelect.addEventListener("input", onToChanged);
+
+    // Fix iOS bfcache: quay lại trang vẫn giữ select cũ
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) {
+        fromSelect.selectedIndex = 0;
+        toSelect.selectedIndex = 0;
+        toSelect.value = "";
+        safeUpdatePrice();
+      }
     });
   }
 
-  // ====== TAB SÂN BAY: SÂN BAY NỘI BÀI → HẢI DƯƠNG ======
+  // ====== TAB SÂN BAY: SÂN BAY NỘI BÀI → HẢI DƯƠƠNG ======
   const tabs = document.querySelectorAll(".booking-tab");
 
-  // Danh sách Hải Dương cho tab sân bay (giống danh sách trong HTML)
+  // Danh sách Hải Dương cho tab sân bay
   const HD_LIST = [
     { v: "HD-TPHaiDuong", t: "TP Hải Dương" },
     { v: "HD-ChiLinh", t: "Chí Linh" },
@@ -163,21 +185,25 @@ document.addEventListener("DOMContentLoaded", function () {
   function switchToAirportMode() {
     if (!fromSelect || !toSelect) return;
 
-    fromSelect.innerHTML = '<option value="NB-NoiBai">Sân bay Nội Bài (HAN)</option>';
+    fromSelect.innerHTML =
+      '<option value="NB-NoiBai">Sân bay Nội Bài (HAN)</option>';
     fromSelect.value = "NB-NoiBai";
     fromSelect.disabled = true;
     fromSelect.classList.add("airport-select");
 
     let html = '<option value="">Chọn điểm đến</option>';
     html += '<optgroup label="Hải Dương">';
-    html += HD_LIST.map((x) => `<option value="${x.v}">${x.t}</option>`).join("");
+    html += HD_LIST.map((x) => `<option value="${x.v}">${x.t}</option>`).join(
+      ""
+    );
     html += "</optgroup>";
 
     toSelect.innerHTML = html;
     toSelect.value = "";
+    toSelect.selectedIndex = 0;
     toSelect.disabled = false;
 
-    updatePrice();
+    safeUpdatePrice();
   }
 
   function switchToNormalMode() {
@@ -188,7 +214,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (tabs && tabs.length > 0) {
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
-        tabs.forEach(function (t) { t.classList.remove("active"); });
+        tabs.forEach(function (t) {
+          t.classList.remove("active");
+        });
         tab.classList.add("active");
 
         const type = tab.dataset.type;
@@ -223,13 +251,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return "";
       }
 
-      const originFull = fromCity === "NB" ? cityLabel("NB") : `${fromName}, ${cityLabel(fromCity)}`;
+      const originFull =
+        fromCity === "NB" ? cityLabel("NB") : `${fromName}, ${cityLabel(fromCity)}`;
       const destFull = `${toName}, ${cityLabel(toCity)}`;
 
       const url =
         "https://www.google.com/maps/dir/?api=1" +
-        "&origin=" + encodeURIComponent(originFull) +
-        "&destination=" + encodeURIComponent(destFull);
+        "&origin=" +
+        encodeURIComponent(originFull) +
+        "&destination=" +
+        encodeURIComponent(destFull);
 
       window.open(url, "_blank");
     });
@@ -237,7 +268,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ====== CHECK MOBILE ======
   function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   }
 
   // ====== NÚT "ĐẶT XE NGAY" (header & cột cam kết) ======
@@ -276,5 +309,5 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Gọi update lần đầu
-  updatePrice();
+  safeUpdatePrice();
 });
